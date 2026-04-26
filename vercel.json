@@ -15,7 +15,7 @@
   ],
   "functions": {
     "backend/server.js": {
-      "runtime": "vercel-node@latest",
+      "runtime": "@vercel/node",
       "includeFiles": "backend/**"
     }
   }
