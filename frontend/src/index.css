@@ -1,0 +1,79 @@
+:root {
+  /* Gen Z Vibrant Palette */
+  --clr-bg: #050505;
+  --clr-surface: #121212;
+  --clr-primary: #6366f1; /* Electric Indigo */
+  --clr-secondary: #f43f5e; /* Hot Pink */
+  --clr-accent: #84cc16; /* Neon Lime */
+  --clr-text-main: #ffffff;
+  --clr-text-muted: #a1a1aa;
+  
+  /* Gradients */
+  --grad-main: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  --grad-surface: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+
+  /* Spacing & Borders */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+  --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--clr-bg);
+  color: var(--clr-text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* Background blob animations for Gen Z feel */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+body::before {
+  top: -10vw;
+  left: -10vw;
+  background: var(--clr-primary);
+  animation: float 20s infinite alternate;
+}
+
+body::after {
+  bottom: -10vw;
+  right: -10vw;
+  background: var(--clr-secondary);
+  animation: float 20s infinite alternate-reverse;
+}
+
+@keyframes float {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(10vw, 10vw) scale(1.2); }
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

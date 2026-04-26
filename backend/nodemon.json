@@ -1,0 +1,8 @@
+{
+    "watch": ["*.js", "routes/**/*.js", "controllers/**/*.js", "models/**/*.js", "middlewares/**/*.js", "validations/**/*.js", "utils/**/*.js", "config/**/*.js"],
+    "ignore": ["node_modules", "postman", "*.test.js"],
+    "exec": "node server.js",
+    "env": {
+        "NODE_ENV": "development"
+    }
+}

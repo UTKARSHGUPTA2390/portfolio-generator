@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "portfolio-site-generator-collection",
+		"name": "Portfolio Site Generator",
+		"description": "Centralized API collection for the Portfolio Site Generator (MERN Stack).\n\n📁 Folder Structure:\n- Auth → Register, Login, Logout\n- Projects → CRUD for portfolio projects (coming soon)\n- Profile → User profile management (coming soon)\n\n🌐 Base URL: http://localhost:5000",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "🔐 Auth",
+			"description": "Authentication endpoints — Register, Login, Logout",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "register"]
+						},
+						"description": "Register a new user.\n\n**Validations:**\n- `name` → required\n- `email` → required, valid format\n- `password` → required, min 6 chars\n\n**Success (201):**\n```json\n{\n  \"success\": true,\n  \"message\": \"User registered successfully\",\n  \"data\": { \"id\": \"...\", \"name\": \"...\", \"email\": \"...\" }\n}\n```\n\n**Error (400) — Duplicate email:**\n```json\n{\n  \"success\": false,\n  \"message\": \"User already exists\"\n}\n```"
+					},
+					"response": [
+						{
+							"name": "✅ Success — User Registered",
+							"originalRequest": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/register",
+									"host": ["{{base_url}}"],
+									"path": ["api", "auth", "register"]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [{ "key": "Content-Type", "value": "application/json" }],
+							"cookie": [],
+							"body": "{\n  \"success\": true,\n  \"message\": \"User registered successfully\",\n  \"data\": {\n    \"id\": \"64f7a2b9e1a3c7001c2d3e4f\",\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\"\n  }\n}"
+						},
+						{
+							"name": "❌ Error — Duplicate Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/register",
+									"host": ["{{base_url}}"],
+									"path": ["api", "auth", "register"]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [{ "key": "Content-Type", "value": "application/json" }],
+							"cookie": [],
+							"body": "{\n  \"success\": false,\n  \"message\": \"User already exists\"\n}"
+						},
+						{
+							"name": "❌ Error — Validation Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"not-an-email\",\n  \"password\": \"123\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/register",
+									"host": ["{{base_url}}"],
+									"path": ["api", "auth", "register"]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [{ "key": "Content-Type", "value": "application/json" }],
+							"cookie": [],
+							"body": "{\n  \"success\": false,\n  \"message\": \"Name is required\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👤 Projects",
+			"description": "Portfolio project CRUD endpoints — coming soon",
+			"item": []
+		},
+		{
+			"name": "📄 Portfolio",
+			"description": "Portfolio data management (Resume, Skills, Projects, Experience)",
+			"item": [
+				{
+					"name": "Get User Portfolio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/portfolio",
+							"host": ["{{base_url}}"],
+							"path": ["api", "portfolio"]
+						},
+						"description": "Retrieve the current user's portfolio data.\n\nRequires an active 'token' cookie (Login first)."
+					}
+				},
+				{
+					"name": "Save/Update Portfolio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Johnathan Doe\",\n  \"designation\": \"Full Stack Developer\",\n  \"about\": \"Passionate about building scalable web applications...\",\n  \"contactEmail\": \"contact@johndoe.com\",\n  \"phone\": \"+1-234-567-890\",\n  \"resumeUrl\": \"https://drive.google.com/file/d/your-id/view?usp=sharing\",\n  \"githubUrl\": \"https://github.com/johndoe\",\n  \"twitterUrl\": \"https://twitter.com/johndoe\",\n  \"skills\": [\"React\", \"Node.js\", \"MongoDB\", \"TypeScript\"],\n  \"projects\": [\n    {\n      \"title\": \"E-commerce Platform\",\n      \"description\": \"A full-featured online shop\",\n      \"link\": \"https://demo-shop.com\",\n      \"tech\": [\"Next.js\", \"Stripe\"]\n    }\n  ],\n  \"experience\": [\n    {\n      \"company\": \"Tech Solutions Inc.\",\n      \"role\": \"Senior Developer\",\n      \"duration\": \"2021 - Present\",\n      \"description\": \"Leading the dev team...\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/portfolio",
+							"host": ["{{base_url}}"],
+							"path": ["api", "portfolio"]
+						},
+						"description": "Create or update the current user's portfolio data.\n\n**Note:** This uses an `upsert` logic, meaning it will create a new portfolio if none exists for the user, or update the existing one."
+					}
+				}
+			]
+		}
+	]
+}
