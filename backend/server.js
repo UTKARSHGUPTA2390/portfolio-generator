@@ -35,15 +35,13 @@ app.get('/', (req, res) => {
 // Error Handling Middleware (Must be after routes)
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+// Export the app for Vercel
+module.exports = app;
 
-const server = app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
-    console.log(`Error: ${err.message}`);
-    // Close server & exit process
-    server.close(() => process.exit(1));
-});
+// Only start the server if we're not running as a Vercel function
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+    });
+}
