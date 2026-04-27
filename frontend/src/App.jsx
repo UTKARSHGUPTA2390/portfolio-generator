@@ -4,6 +4,7 @@ import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
 import PortfolioFormPage from './pages/PortfolioFormPage';
 import UserPortfolioPage from './pages/UserPortfolioPage';
+import PortfolioReadyPage from './pages/PortfolioReadyPage';
 import { useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -43,6 +44,15 @@ function App() {
                 <PortfolioFormPage />
               </ProtectedRoute>
             } 
+          />
+
+          <Route
+            path="/portfolio-ready/:publicSlug"
+            element={
+              <ProtectedRoute>
+                <PortfolioReadyPage />
+              </ProtectedRoute>
+            }
           />
 
           {/* Fallback */}

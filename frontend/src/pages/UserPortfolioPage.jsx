@@ -12,7 +12,6 @@ const UserPortfolioPage = () => {
     const [portfolioData, setPortfolioData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -34,21 +33,6 @@ const UserPortfolioPage = () => {
             fetchUserData();
         }
     }, [publicSlug]);
-
-    const publicUrl = typeof window !== 'undefined' && publicSlug
-        ? `${window.location.origin}/${publicSlug}`
-        : '';
-
-    const handleCopy = async () => {
-        if (!publicUrl) return;
-        try {
-            await navigator.clipboard.writeText(publicUrl);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
-        } catch {
-            setCopied(false);
-        }
-    };
 
     if (loading) {
         return (
@@ -72,46 +56,6 @@ const UserPortfolioPage = () => {
 
     return (
         <div className="user-portfolio-page">
-            <div
-                style={{
-                    maxWidth: '1200px',
-                    margin: '6rem auto 0',
-                    padding: '0 1rem',
-                    display: 'flex',
-                    gap: '0.75rem',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    position: 'relative',
-                    zIndex: 5,
-                }}
-            >
-                <span style={{ fontWeight: 700 }}>Public URL:</span>
-                <code
-                    style={{
-                        background: 'rgba(255, 255, 255, 0.08)',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
-                        color: '#f0f0f5',
-                        padding: '0.35rem 0.5rem',
-                        borderRadius: '6px',
-                    }}
-                >
-                    {publicUrl}
-                </code>
-                <button
-                    type="button"
-                    onClick={handleCopy}
-                    style={{
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        background: 'rgba(255, 255, 255, 0.04)',
-                        color: '#f0f0f5',
-                        padding: '0.35rem 0.65rem',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                    }}
-                >
-                    {copied ? 'Copied' : 'Copy'}
-                </button>
-            </div>
             <PortfolioView data={portfolioData} />
         </div>
     );

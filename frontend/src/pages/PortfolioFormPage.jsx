@@ -137,7 +137,7 @@ const PortfolioFormPage = () => {
             const publicSlug = result?.data?.publicSlug;
             if (publicSlug) {
                 setTimeout(() => {
-                    navigate(`/${publicSlug}`);
+                    navigate(`/portfolio-ready/${publicSlug}`);
                 }, 1500); // Small delay to let them see the success toast
             }
         } catch (err) {
