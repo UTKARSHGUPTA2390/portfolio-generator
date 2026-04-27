@@ -5,7 +5,7 @@
 import axios from 'axios';
 
 const portfolioApi = axios.create({
-    baseURL: '/api/portfolio',
+    baseURL: '/api',
     withCredentials: true,
 });
 
@@ -13,7 +13,7 @@ const portfolioApi = axios.create({
  * Get current user's portfolio
  */
 export const getPortfolio = async () => {
-    const response = await portfolioApi.get('');
+    const response = await portfolioApi.get('/portfolio');
     return response.data;
 };
 
@@ -22,7 +22,7 @@ export const getPortfolio = async () => {
  * @param {string} userId 
  */
 export const getPublicPortfolio = async (userId) => {
-    const response = await portfolioApi.get(`/u/${userId}`);
+    const response = await portfolioApi.get(`/portfolio/u/${userId}`);
     return response.data;
 };
 
@@ -57,6 +57,6 @@ export const savePortfolio = async (rawData) => {
         }))
     };
 
-    const response = await portfolioApi.post('', formattedData);
+    const response = await portfolioApi.post('/portfolio', formattedData);
     return response.data;
 };
