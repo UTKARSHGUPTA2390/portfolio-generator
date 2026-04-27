@@ -10,6 +10,12 @@ const errorHandler = require('./middlewares/errorMiddleware');
 // Load environment variables
 dotenv.config();
 
+// Sanity check for environment variables in production (Vercel)
+if (process.env.NODE_ENV === 'production') {
+    if (!process.env.MONGO_URI) console.error('CRITICAL: MONGO_URI is not defined!');
+    if (!process.env.JWT_SECRET) console.error('CRITICAL: JWT_SECRET is not defined!');
+}
+
 // Connect to Database
 connectDB();
 
