@@ -18,11 +18,11 @@ export const getPortfolio = async () => {
 };
 
 /**
- * Get a public portfolio by User ID
- * @param {string} userId 
+ * Get a public portfolio by slug
+ * @param {string} slug
  */
-export const getPublicPortfolio = async (userId) => {
-    const response = await portfolioApi.get(`/portfolio/u/${userId}`);
+export const getPublicPortfolio = async (slug) => {
+    const response = await portfolioApi.get(`/portfolio/public/${slug}`);
     return response.data;
 };
 

@@ -24,7 +24,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<AuthPage />} />
-          <Route path="/u/:userId" element={<UserPortfolioPage />} />
+          <Route path="/:publicSlug" element={<UserPortfolioPage />} />
 
           {/* Protected Routes */}
           <Route 

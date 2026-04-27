@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { getPortfolio, savePortfolio, getPortfolioById } = require('../controllers/portfolioController');
+const { getPortfolio, savePortfolio, getPortfolioBySlug } = require('../controllers/portfolioController');
 const { protect } = require('../middlewares/authMiddleware');
 
 // Public routes
-router.get('/u/:id', getPortfolioById);
+router.get('/public/:slug', getPortfolioBySlug);
 
 // Protected routes
 router.use(protect);

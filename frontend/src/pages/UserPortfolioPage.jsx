@@ -8,15 +8,16 @@ import PortfolioView from '../components/template/PortfolioView';
 import '../styles/portfolio-form.css'; // Reusing some base styles for loader/error
 
 const UserPortfolioPage = () => {
-    const { userId } = useParams();
+    const { publicSlug } = useParams();
     const [portfolioData, setPortfolioData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const result = await getPublicPortfolio(userId);
+                const result = await getPublicPortfolio(publicSlug);
                 if (result?.success) {
                     setPortfolioData(result.data);
                 } else {
@@ -29,10 +30,25 @@ const UserPortfolioPage = () => {
             }
         };
 
-        if (userId) {
+        if (publicSlug) {
             fetchUserData();
         }
-    }, [userId]);
+    }, [publicSlug]);
+
+    const publicUrl = typeof window !== 'undefined' && publicSlug
+        ? `${window.location.origin}/${publicSlug}`
+        : '';
+
+    const handleCopy = async () => {
+        if (!publicUrl) return;
+        try {
+            await navigator.clipboard.writeText(publicUrl);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            setCopied(false);
+        }
+    };
 
     if (loading) {
         return (
@@ -56,6 +72,36 @@ const UserPortfolioPage = () => {
 
     return (
         <div className="user-portfolio-page">
+            <div
+                style={{
+                    maxWidth: '1200px',
+                    margin: '1.25rem auto 0',
+                    padding: '0 1rem',
+                    display: 'flex',
+                    gap: '0.75rem',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                }}
+            >
+                <span style={{ fontWeight: 700 }}>Public URL:</span>
+                <code style={{ background: '#eef2ff', padding: '0.35rem 0.5rem', borderRadius: '6px' }}>
+                    {publicUrl}
+                </code>
+                <button
+                    type="button"
+                    onClick={handleCopy}
+                    style={{
+                        border: '1px solid #c7d2fe',
+                        background: '#ffffff',
+                        color: '#1f2937',
+                        padding: '0.35rem 0.65rem',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {copied ? 'Copied' : 'Copy'}
+                </button>
+            </div>
             <PortfolioView data={portfolioData} />
         </div>
     );

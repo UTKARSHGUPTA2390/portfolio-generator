@@ -7,6 +7,13 @@ const portfolioSchema = new mongoose.Schema({
         required: true,
         unique: true // One portfolio per user
     },
+    publicSlug: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        sparse: true
+    },
     fullName: {
         type: String,
         required: [true, 'Full name is required'],

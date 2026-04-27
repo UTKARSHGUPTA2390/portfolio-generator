@@ -7,7 +7,6 @@ import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import { usePortfolio } from '../hooks/usePortfolio';
 import { useToast } from '../context/ToastContext';
-import { useAuth } from '../context/AuthContext';
 import '../styles/portfolio-form.css';
 
 const PortfolioFormPage = () => {
@@ -15,7 +14,6 @@ const PortfolioFormPage = () => {
     const navigate = useNavigate();
     const { handleSavePortfolio, fetchPortfolio, loading, error } = usePortfolio();
     const { showToast } = useToast();
-    const { user } = useAuth(); // Import useAuth to get user id
     const userType = searchParams.get('type') || 'fresher'; // 'fresher' or 'experienced'
     const [formData, setFormData] = useState({
         personal: {
@@ -132,13 +130,14 @@ const PortfolioFormPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await handleSavePortfolio(formData);
+            const result = await handleSavePortfolio(formData);
             showToast('Portfolio data saved successfully! ✨', 'success');
-            
-            // Redirect to the dynamic user portfolio page
-            if (user?.id) {
+
+            // Redirect to a stable public slug route.
+            const publicSlug = result?.data?.publicSlug;
+            if (publicSlug) {
                 setTimeout(() => {
-                    navigate(`/u/${user.id}`);
+                    navigate(`/${publicSlug}`);
                 }, 1500); // Small delay to let them see the success toast
             }
         } catch (err) {
