@@ -1,7 +1,14 @@
 const app = require("../backend/server.js");
+const connectDB = require("../backend/config/db.js");
 
-module.exports = (req, res) => {
-  // Debug log to help identify routing issues in Vercel
-  console.log(`[API Request]: ${req.method} ${req.url}`);
+module.exports = async (req, res) => {
+  // Ensure DB is connected for this request
+  // Mongoose reuses the existing connection if already established
+  try {
+    await connectDB();
+  } catch (err) {
+    console.error("Database connection failed during request:", err);
+  }
+  
   return app(req, res);
 };
