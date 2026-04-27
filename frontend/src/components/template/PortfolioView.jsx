@@ -49,6 +49,8 @@ const PortfolioView = ({ data }) => {
                 currentView={currentView} 
                 setView={setView} 
                 isExperienced={hasExperience} 
+                fullName={data?.fullName}
+                resumeUrl={data?.resumeUrl}
             />
 
             {/* Content Stage */}

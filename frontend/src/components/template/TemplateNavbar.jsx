@@ -3,7 +3,14 @@
 
 import React from 'react';
 
-const TemplateNavbar = ({ currentView, setView, isExperienced }) => {
+const getLogoText = (fullName) => {
+    if (!fullName?.trim()) return 'ALEX.DEV';
+
+    const firstName = fullName.trim().split(/\s+/)[0];
+    return `${firstName}.DEV`.toUpperCase();
+};
+
+const TemplateNavbar = ({ currentView, setView, isExperienced, fullName, resumeUrl }) => {
     const navItems = [
         { id: 'home', label: 'Home' },
         { id: 'about', label: 'About' },
@@ -14,7 +21,9 @@ const TemplateNavbar = ({ currentView, setView, isExperienced }) => {
 
     return (
         <nav className="tpl-navbar">
-            <div className="tpl-nav-logo">ALEX.DEV</div>
+            <div className="tpl-nav-logo" title={fullName || 'Alex Chen'}>
+                {getLogoText(fullName)}
+            </div>
             
             <div className="tpl-nav-links">
                 {navItems.map((item) => (
@@ -30,7 +39,7 @@ const TemplateNavbar = ({ currentView, setView, isExperienced }) => {
 
             <div className="tpl-nav-actions">
                 <a 
-                    href="#" 
+                    href={resumeUrl || '#'} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="btn btn-outline" 

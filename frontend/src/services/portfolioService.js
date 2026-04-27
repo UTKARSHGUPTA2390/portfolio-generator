@@ -13,7 +13,7 @@ const portfolioApi = axios.create({
  * Get current user's portfolio
  */
 export const getPortfolio = async () => {
-    const response = await portfolioApi.get('/');
+    const response = await portfolioApi.get('');
     return response.data;
 };
 
@@ -57,6 +57,6 @@ export const savePortfolio = async (rawData) => {
         }))
     };
 
-    const response = await portfolioApi.post('/', formattedData);
+    const response = await portfolioApi.post('', formattedData);
     return response.data;
 };
