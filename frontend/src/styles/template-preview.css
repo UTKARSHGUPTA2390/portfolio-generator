@@ -26,9 +26,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 4rem;
-  background: rgba(5, 5, 8, 0.7);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(5, 5, 8, 0.96);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 1000;
 }
