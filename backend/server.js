@@ -2,7 +2,6 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const errorHandler = require('./middlewares/errorMiddleware');
@@ -15,9 +14,6 @@ if (process.env.NODE_ENV === 'production') {
     if (!process.env.MONGO_URI) console.error('CRITICAL: MONGO_URI is not defined!');
     if (!process.env.JWT_SECRET) console.error('CRITICAL: JWT_SECRET is not defined!');
 }
-
-// Connect to Database
-connectDB();
 
 const app = express();
 
