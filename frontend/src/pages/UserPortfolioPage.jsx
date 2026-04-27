@@ -75,25 +75,35 @@ const UserPortfolioPage = () => {
             <div
                 style={{
                     maxWidth: '1200px',
-                    margin: '1.25rem auto 0',
+                    margin: '6rem auto 0',
                     padding: '0 1rem',
                     display: 'flex',
                     gap: '0.75rem',
                     alignItems: 'center',
                     flexWrap: 'wrap',
+                    position: 'relative',
+                    zIndex: 5,
                 }}
             >
                 <span style={{ fontWeight: 700 }}>Public URL:</span>
-                <code style={{ background: '#eef2ff', padding: '0.35rem 0.5rem', borderRadius: '6px' }}>
+                <code
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.08)',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        color: '#f0f0f5',
+                        padding: '0.35rem 0.5rem',
+                        borderRadius: '6px',
+                    }}
+                >
                     {publicUrl}
                 </code>
                 <button
                     type="button"
                     onClick={handleCopy}
                     style={{
-                        border: '1px solid #c7d2fe',
-                        background: '#ffffff',
-                        color: '#1f2937',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                        color: '#f0f0f5',
                         padding: '0.35rem 0.65rem',
                         borderRadius: '6px',
                         cursor: 'pointer',
