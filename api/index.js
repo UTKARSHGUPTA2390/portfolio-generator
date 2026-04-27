@@ -1,8 +1,7 @@
-module.exports = function (req, res) {
-  res.status(200).json({
-    status: "success",
-    message: "Diagnostic check passed. Infrastructure is healthy.",
-    method: req.method,
-    url: req.url
-  });
+const app = require("../backend/server.js");
+
+module.exports = (req, res) => {
+  // Debug log to help identify routing issues in Vercel
+  console.log(`[API Request]: ${req.method} ${req.url}`);
+  return app(req, res);
 };
